@@ -1,7 +1,13 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from "../app/slices/userApiSlice";
+import { useDispatch, useSelector} from "react-redux";
 
 const Login = () => {
+  const navigate = useNavigate()
+  const {userInfo} = useSelector(state=> state.auth)
+  const dispatch = useDispatch();
+  const {loading, message, error } = useSelector(state=> state.userApi)
   const [formValues, setFormValues] = useState({
     email: "",
     password: "",
@@ -15,7 +21,14 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formValues);
+    dispatch(loginUser(formValues));
   };
+
+  useEffect(()=>{
+    if(userInfo){
+      navigate('/')
+    }
+  },[userInfo, navigate])
   return (
     <div className="prose flex flex-col justify-center items-center mx-auto">
       <h2 className="text-start">Login To your account</h2>
@@ -37,9 +50,11 @@ const Login = () => {
           className="input input-bordered input-primary max-w-xs"
         />
         <button type="submit" className="btn btn-primary max-w-xs">
-          Register
+          Log In
         </button>
       </form>
+      {loading && <p>Loading...</p>}
+      {error && <p className="text-error">{message}</p>}
       <p>
         Don't have an account?{" "}
         <Link to="/register">

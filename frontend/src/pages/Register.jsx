@@ -1,7 +1,14 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
+import { registerUser } from "../app/slices/userApiSlice";
 const Register = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { userInfo } = useSelector((state) => state.auth);
+
+  const { loading, message } = useSelector((state) => state.userApi);
   const [formValues, setFormValues] = useState({
     name: "",
     password: "",
@@ -16,12 +23,19 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formValues);
+    dispatch(registerUser(formValues));
   };
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/");
+    }
+  }, [userInfo, navigate]);
   return (
     <div className="prose flex flex-col justify-center items-center mx-auto">
       <h2 className="text-start">Create New account</h2>
       <form className="form-control gap-2" onSubmit={handleSubmit}>
         <input
+          required
           onChange={handleChanges}
           name="name"
           value={name}
@@ -30,6 +44,7 @@ const Register = () => {
           className="input input-bordered input-primary max-w-xs"
         />
         <input
+          required
           onChange={handleChanges}
           name="email"
           value={email}
@@ -38,6 +53,7 @@ const Register = () => {
           className="input input-bordered input-primary max-w-xs"
         />
         <input
+          required
           onChange={handleChanges}
           name="password"
           value={password}
@@ -49,6 +65,8 @@ const Register = () => {
           Register
         </button>
       </form>
+      {loading && <p>Loading...</p>}
+      {message && <p className="text-error">{message}</p>}
       <p>
         Already have an account?{" "}
         <Link to="/login">
