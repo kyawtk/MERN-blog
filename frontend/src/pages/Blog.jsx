@@ -9,10 +9,16 @@ const Blog = () => {
   const [blog, setBlog] = useState("");
   useEffect(() => {
     async function getBlog() {
+      let userInfo =JSON.parse( localStorage.getItem('userInfo'))
+      let token = userInfo.token
+      console.log(token)
+      let config ={
+        headers: {
+          Authorization: `Bearer ${token}`,
+        
+      }}
       try {
-        let response = await axios.get("http://127.0.0.1:9000/blogs/" + id, {
-          withCredentials: true,
-        });
+        let response = await axios.get("http://127.0.0.1:9000/blogs/" + id,config);
 
         setBlog(response.data);
       } catch (err) {
@@ -28,7 +34,7 @@ const Blog = () => {
       <h1 className="">{blog.title}</h1>
       <h3 className="">{blog.user.name}</h3>
       <p className="">{new Date(blog.createdAt).toLocaleDateString()}</p>
-      <p className=" text-lg whitespace-pre-wrap">{blog.content}</p>
+      <p className="text-lg whitespace-pre-wrap">{blog.content}</p>
     </div>
   ) : err ? (
     <h1 className="prose">{err}</h1>

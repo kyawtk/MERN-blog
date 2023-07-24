@@ -11,5 +11,6 @@ const generateToken = (res, userId) => {
     httpOnly: true,
     sameSite: "strict",
   });
+  return token;
 };
 export default generateToken;
