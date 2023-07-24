@@ -39,7 +39,7 @@ const Login = () => {
           value={email}
           type="email"
           placeholder="Email"
-          className="input input-bordered input-primary max-w-xs"
+          className="input input-bordered  max-w-xs"
         />{" "}
         <input
           value={password}
@@ -47,9 +47,9 @@ const Login = () => {
           onChange={handleChanges}
           type="password"
           placeholder="Password"
-          className="input input-bordered input-primary max-w-xs"
+          className="input input-bordered  max-w-xs"
         />
-        <button type="submit" className="btn btn-primary max-w-xs">
+        <button type="submit" className="btn  max-w-xs">
           Log In
         </button>
       </form>
@@ -58,7 +58,7 @@ const Login = () => {
       <p>
         Don't have an account?{" "}
         <Link to="/register">
-          <span className="text-primary">Register</span>
+          <span className="">Register</span>
         </Link>
       </p>
     </div>

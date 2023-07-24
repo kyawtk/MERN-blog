@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logoutUser } from "../app/slices/userApiSlice";
+import BlogForm from "../components/BlogForm";
+import TextEditor from "../components/TextEditor";
 
 useSelector;
 const Profile = () => {
@@ -17,7 +19,7 @@ const Profile = () => {
 
   return (
     <>
-      <div className="card w-96 bg-primary text-primary-content">
+      <div className="card w-96">
         <div className="card-body">
           <h2 className="card-title">{name}</h2>
           <p>{email}</p>
@@ -26,12 +28,8 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <div className="card w-96 bg-primary text-primary-content">
-        <div className="card-body">
-          <h2 className="card-title">Update your account info</h2>
-         
-        </div>
-      </div>
+      <TextEditor/>
+      <BlogForm {...userInfo}></BlogForm>
     </>
   );
 };

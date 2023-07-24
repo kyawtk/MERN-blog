@@ -41,7 +41,7 @@ const Register = () => {
           value={name}
           type="text"
           placeholder="Username"
-          className="input input-bordered input-primary max-w-xs"
+          className="input input-bordered  max-w-xs"
         />
         <input
           required
@@ -50,7 +50,7 @@ const Register = () => {
           value={email}
           type="email"
           placeholder="Email"
-          className="input input-bordered input-primary max-w-xs"
+          className="input input-bordered  max-w-xs"
         />
         <input
           required
@@ -59,9 +59,9 @@ const Register = () => {
           value={password}
           type="password"
           placeholder="Password"
-          className="input input-bordered input-primary max-w-xs"
+          className="input input-bordered  max-w-xs"
         />
-        <button type="submit" className="btn btn-primary max-w-xs">
+        <button type="submit" className="btn  max-w-xs">
           Register
         </button>
       </form>
@@ -70,7 +70,7 @@ const Register = () => {
       <p>
         Already have an account?{" "}
         <Link to="/login">
-          <span className="text-primary">Login</span>
+          <span className="">Login</span>
         </Link>
       </p>
     </div>

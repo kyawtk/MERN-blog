@@ -6,7 +6,7 @@ import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import Protect from "./pages/Protect";
 import Home from "./pages/Home";
-
+import Blog from "./pages/Blog";
 Register;
 function App() {
   return (
@@ -18,6 +18,14 @@ function App() {
           element={
             <Protect>
               <Home />
+            </Protect>
+          }
+        ></Route>
+        <Route
+          path="/blogs/:id"
+          element={
+            <Protect>
+              <Blog/>
             </Protect>
           }
         ></Route>

@@ -54,13 +54,20 @@ const userApiSlice = createSlice({
   },
 });
 
-const baseurl = "http://localhost:9000";
+const baseurl = "http://127.0.0.1:9000";
 
 export const registerUser = createAsyncThunk(
   "userApi/registerUser",
   async (user, thunkApi) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true, // Make sure this is set to true
+    };
+    
     try {
-      const response = await axios.post(baseurl + "/api/users", user);
+      const response = await axios.post(baseurl + "/api/users", user,config);
       console.log(response.data);
       thunkApi.dispatch(setCredentials(response.data));
       return response.data;
@@ -81,8 +88,15 @@ export const registerUser = createAsyncThunk(
 export const loginUser = createAsyncThunk(
   "userApi/loginUser",
   async (user, thunkApi) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true, // Make sure this is set to true
+    };
+    
     try {
-      const response = await axios.post(baseurl + "/api/users/auth", user);
+      const response = await axios.post(baseurl + "/api/users/auth", user, config);
       console.log(response);
       thunkApi.dispatch(setCredentials(response.data));
       return response.data;
