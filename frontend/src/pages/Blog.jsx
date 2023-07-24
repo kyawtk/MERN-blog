@@ -9,10 +9,16 @@ const Blog = () => {
   const [blog, setBlog] = useState("");
   useEffect(() => {
     async function getBlog() {
+      let userInfo =JSON.parse( localStorage.getItem('userInfo'))
+      let token = userInfo.token
+      console.log(token)
+      let config ={
+        headers: {
+          Authorization: `Bearer ${token}`,
+        
+      }}
       try {
-        let response = await axios.get("http://127.0.0.1:9000/blogs/" + id, {
-          withCredentials: true,
-        });
+        let response = await axios.get("http://127.0.0.1:9000/blogs/" + id,config);
 
         setBlog(response.data);
       } catch (err) {
