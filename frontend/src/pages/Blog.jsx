@@ -34,7 +34,7 @@ const Blog = () => {
       <h1 className="">{blog.title}</h1>
       <h3 className="">{blog.user.name}</h3>
       <p className="">{new Date(blog.createdAt).toLocaleDateString()}</p>
-      <p className=" text-lg whitespace-pre-wrap">{blog.content}</p>
+      <p className="text-lg whitespace-pre-wrap">{blog.content}</p>
     </div>
   ) : err ? (
     <h1 className="prose">{err}</h1>
