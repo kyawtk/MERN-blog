@@ -35,3 +35,11 @@ const Profile = () => {
 };
 
 export default Profile;
+
+
+const UserBlogs = () => {
+  const {userInfo} = useSelector(state=> state.auth)
+  useEffect(() => {
+    
+  },[])
+}

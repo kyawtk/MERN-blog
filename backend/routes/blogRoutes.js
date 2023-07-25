@@ -6,6 +6,7 @@ import {
   createBlog,
   getBlogById,
   updateBlog,
+  getBlogsByUserId,
   deleteBlog,
 } from "../controllers/blogController.js";
 import { verifyToken } from "../middleWare/authMiddleware.js";
@@ -19,5 +20,7 @@ router.post("/", createBlog);
 router.get("/:id", getBlogById);
 router.put("/:id", updateBlog);
 router.delete("/:id", deleteBlog);
+//router to get blogs by userid
+router.get("/user/:id",getBlogsByUserId );
 
 export default router;

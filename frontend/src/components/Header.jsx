@@ -37,7 +37,7 @@ const Menu = ({ showMenu, setShowMenu }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-    className="menu shadow-md flex justify-start items-center bg-primary z-50 flex-col fixed top-0 left-0 h-screen w-screen sm:w-[70vw] md:w-[50vw] lg:w-[30vw] ">
+    className="menu shadow-md flex justify-start items-center bg-secondary z-50 flex-col fixed top-0 left-0 h-screen w-screen sm:w-[70vw] md:w-[50vw] lg:w-[30vw] ">
       <li>
         <select
           onChange={(e) => dispatch(changeTheme(e.target.value))}
