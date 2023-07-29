@@ -1,15 +1,16 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createBlog } from "../app/slices/blogSlice";
 
-const BlogForm = ({ _id }) => {
+const BlogForm = () => {
+  const {userInfo}  = useSelector(state => state.auth)
     const navigate  = useNavigate()
     const dispatch = useDispatch()
   const [formValues, setFormValues] = useState({
     title: "",
     content: "",
-    user: _id,
+    user: userInfo._id,
   });
   const { title, content } = formValues;
   const handleChange = (e) => {

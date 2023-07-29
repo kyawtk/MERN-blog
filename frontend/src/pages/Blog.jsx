@@ -11,7 +11,7 @@ const Blog = () => {
     async function getBlog() {
       let userInfo =JSON.parse( localStorage.getItem('userInfo'))
       let token = userInfo.token
-      console.log(token)
+      
       let config ={
         headers: {
           Authorization: `Bearer ${token}`,
@@ -21,7 +21,9 @@ const Blog = () => {
         let response = await axios.get("http://127.0.0.1:9000/blogs/" + id,config);
 
         setBlog(response.data);
-      } catch (err) {
+        console.log(response.data);
+      }
+       catch (err) {
         console.log(err);
         setErr(err.message);
       }
@@ -36,7 +38,7 @@ const Blog = () => {
       <p className="">{new Date(blog.createdAt).toLocaleDateString()}</p>
       <p className="text-lg whitespace-pre-wrap">{blog.content}</p>
       <button className="btn" onClick={() => window.scrollTo({top:0,behavior:'smooth'})}>Scroll To Top</button>
-      <Link to={'/'}>More Thoughts from {blog.user.name}</Link>
+      <Link to={'/user/'+ blog.user._id}>More Thoughts from {blog.user.name}</Link>
     </div>
   ) : err ? (
     <h1 className="prose">{err}</h1>

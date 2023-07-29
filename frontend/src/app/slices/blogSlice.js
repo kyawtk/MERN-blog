@@ -12,7 +12,12 @@ const initialState = {
 const blogSlice = createSlice({
   name: "blogs",
   initialState,
-  reducers: {},
+  reducers: {
+    deleteBlogFromClient : (state,action)=>{
+      state.blogs = state.blogs.filter((blog) => blog._id !== action.payload);
+      state.message = "Blog Deleted successfully";
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllBlogs.pending, (state) => {
@@ -44,6 +49,21 @@ const blogSlice = createSlice({
         state.error = true;
         state.message = action.payload;
         state.success = false;
+      })
+      .addCase(deleteBlog.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(deleteBlog.fulfilled, (state) => {
+        state.loading = false;
+
+        state.message = "Blog Deleted successfully";
+        state.success = true;
+      })
+      .addCase(deleteBlog.rejected, (state, action) => {
+        state.loading = false;
+        state.error = true;
+        state.message = action.payload;
+        state.success = false;
       });
     // .addCase(getBlogByID.pending, (state) => {
     //     state.loading = true;
@@ -65,6 +85,9 @@ const blogSlice = createSlice({
     // })
   },
 });
+
+export const {deleteBlogFromClient} = blogSlice.actions;
+
 const baseurl = "http://127.0.0.1:9000";
 
 export const fetchAllBlogs = createAsyncThunk(
@@ -109,6 +132,25 @@ export const createBlog = createAsyncThunk(
   async (blog, thunkApi) => {
     try {
       const response = await axios.post(baseurl + "/blogs", blog, config);
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      let message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkApi.rejectWithValue(message);
+    }
+  }
+);
+export const deleteBlog = createAsyncThunk(
+  "blogs/deleteBlog",
+  async (id, thunkApi) => {
+    try {
+      const response = await axios.delete(baseurl + "/blogs/"+ id , config);
       console.log(response);
       return response.data;
     } catch (error) {

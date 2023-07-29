@@ -7,11 +7,13 @@ const Header = () => {
   const [showMenu, setShowMenu] = React.useState(false);
 
   return (
-    <div className="navbar flex justify-between">
+    <div className="navbar flex justify-evenly">
       <button className="btn  normal-case text-xl">
         <Link to={"/"}>Lovely Dairy</Link>
       </button>
-      
+      <button className="btn btn-primary">
+        <Link to={"/write"}>Write</Link>
+      </button>
       <button onClick={() => setShowMenu(true)} className="btn">
         Menu
       </button>
@@ -54,7 +56,7 @@ const Menu = ({ showMenu, setShowMenu }) => {
       </li>
       {userInfo && (
         <li onClick={() => setShowMenu(false)}>
-          <Link to="/profile">{userInfo.name}</Link>
+          <Link to="/user/profile">{userInfo.name}</Link>
         </li>
       )}
       <li>

@@ -7,6 +7,9 @@ import Profile from "./pages/Profile";
 import Protect from "./pages/Protect";
 import Home from "./pages/Home";
 import Blog from "./pages/Blog";
+import MyProfile from "./pages/MyProfile";
+import Write from "./pages/Write";
+
 Register;
 function App() {
   return (
@@ -29,9 +32,34 @@ function App() {
             </Protect>
           }
         ></Route>
+        <Route
+          path="/user/:id"
+          element={
+            <Protect>
+              <Profile/>
+            </Protect>
+          }
+        ></Route>
+        <Route
+          path="/user/profile"
+          element={
+            <Protect>
+              <MyProfile/>
+            </Protect>
+          }
+        ></Route>
+        <Route
+          path="/write"
+          element={
+            <Protect>
+              <Write/>
+            </Protect>
+          }
+        ></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
-        <Route path="/profile" element={<Profile />}></Route>
+       
+
       </Routes>
     </>
   );

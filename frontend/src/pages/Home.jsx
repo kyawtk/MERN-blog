@@ -11,8 +11,8 @@ const Home = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchAllBlogs());
-  }, []);
-console.log(blogs)
+  }, [dispatch]);
+
   return (
     <div className="">
       {loading && <Loading></Loading>}
