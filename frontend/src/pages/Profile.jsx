@@ -35,7 +35,7 @@ const Profile = () => {
     <>
       <div className="">
         <header className="">
-          <h1 className="text-2xl text-center mx-auto">{userInfo.name}</h1>
+          <h1 className="text-2xl text-center mx-auto">{name}</h1>
           <p>Total {blogs.length} blogs written</p>
         </header>
         <UserBlogs id={id} blogs={blogs}></UserBlogs>

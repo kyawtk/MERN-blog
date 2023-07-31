@@ -7,7 +7,7 @@ const Header = () => {
   const [showMenu, setShowMenu] = React.useState(false);
 
   return (
-    <div className="navbar flex justify-evenly">
+    <div className="navbar flex ">
       <button className="btn  normal-case text-xl">
         <Link to={"/"}>Lovely Dairy</Link>
       </button>

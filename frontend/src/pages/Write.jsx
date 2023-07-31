@@ -29,7 +29,7 @@ const Write = () => {
     <div className="flex flex-col  gap-5 w-full">
       <textarea
       value={title}
-        rows={5}
+        rows={1}
         name="title"
         id="title"
         placeholder="Title"
@@ -42,10 +42,10 @@ const Write = () => {
        onChange={handleChange}
         name="content"
         id="content"
-        className="p-7 textarea textarea-primary text-2xl sm:text-3xl lg:text-4xl"
+        className="p-7 textarea border-none outline-none focus:outline-none text-2xl sm:text-3xl lg:text-4xl"
         placeholder="Write down your thoughts"
       ></textarea>
-      <button onClick={handleSubmit}>Ok, I'm done writing</button>
+      <button className='btn btn-secondary' onClick={handleSubmit}>Ok, I'm done writing</button>
     </div>
   );
 };

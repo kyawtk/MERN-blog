@@ -17,7 +17,7 @@ const BlogCard = ({ user, title, body, createdAt, content, _id }) => {
       <h3>{user.name}</h3>
       <small>{date}</small>
       <p>
-        contetn: {content.slice(0, 50)}
+        {content.slice(0, 50)}
         <Link className="text hover:text-info underline" to={`/blogs/${_id}`}>
           {" "}
           ...Read more
