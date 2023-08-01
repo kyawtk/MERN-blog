@@ -1,12 +1,11 @@
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Navigate } from "react-router-dom";
-import { deleteBlog, deleteBlogFromClient, fetchAllBlogs } from "../app/slices/blogSlice";
+import { Link,  } from "react-router-dom";
+import { useDeleteBlogMutation } from "../app/slices/blogSlice";
 
 const BlogCard = ({ user, title, body, createdAt, content, _id }) => {
   const date = new Date(createdAt).toLocaleDateString();
   const { userInfo } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
+  const [deleteBlog] = useDeleteBlogMutation();
   return (
     <div className="border p-4 max-w-[800px] my-10 text-justify w-full mx-auto shadow-md rounded-md hover:shadow-lg hover:shadow-neutral  transition-all duration-300 ease-in-out">
       <Link to={`/blogs/${_id}`}>
@@ -27,8 +26,7 @@ const BlogCard = ({ user, title, body, createdAt, content, _id }) => {
         <button
           className="btn btn-error"
           onClick={() => {
-            dispatch(deleteBlog(_id));
-            dispatch(deleteBlogFromClient(_id))
+           deleteBlog(_id);
           }}
         >
           Delete

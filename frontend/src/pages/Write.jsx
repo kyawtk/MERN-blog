@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { createBlog } from '../app/slices/blogSlice';
 import {  useNavigate } from 'react-router-dom';
+import { useCreateBlogMutation } from '../app/slices/blogSlice';
 
 const Write = () => {
+  const [createBlog] = useCreateBlogMutation()
     const dispatch = useDispatch()
-    const {loading, error, message, success}= useSelector(state => state.blogs)
     const navigate = useNavigate()
     const {userInfo} = useSelector(state=> state.auth)
     const [blogValues, setBlogValues] = useState({
@@ -22,7 +22,7 @@ const Write = () => {
     }     
     function handleSubmit(e){
         e.preventDefault()
-        dispatch(createBlog(blogValues))
+        createBlog(blogValues)
         navigate('/')
     }  
   return (

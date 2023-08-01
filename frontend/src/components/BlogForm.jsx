@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createBlog } from "../app/slices/blogSlice";
+import { useCreateBlogMutation } from "../app/slices/blogSlice";
+
 
 const BlogForm = () => {
   const {userInfo}  = useSelector(state => state.auth)
     const navigate  = useNavigate()
-    const dispatch = useDispatch()
+    const[createBlog] = useCreateBlogMutation()
   const [formValues, setFormValues] = useState({
     title: "",
     content: "",
@@ -21,7 +22,8 @@ const BlogForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formValues);
-    dispatch(createBlog(formValues))
+   createBlog(formValues)
+   navigate("/")
     
   };
   return (
