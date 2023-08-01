@@ -7,7 +7,7 @@ const getToken = () => {
 export const emptyApiSlice = createApi({
   reducerPath: "emptyApiSlice",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:9000",
+    baseUrl: "https://blog-backend-hibu.onrender.com",
     prepareHeaders: (headers) => {
       // Include the JWT token in the request headers
       const token = getToken();

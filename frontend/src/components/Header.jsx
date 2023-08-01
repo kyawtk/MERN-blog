@@ -5,7 +5,7 @@ import { changeTheme } from "../app/slices/themeSlice";
 import { motion, AnimatePresence } from "framer-motion";
 const Header = () => {
   const [showMenu, setShowMenu] = React.useState(false);
-
+  const {userInfo} = useSelector(state => state.auth)
   return (
     <div className="navbar flex ">
       <button className="btn  normal-case text-xl">
@@ -14,6 +14,10 @@ const Header = () => {
       <button className="btn btn-primary">
         <Link to={"/write"}>Write</Link>
       </button>
+    {userInfo && (  <button className="btn btn-primary">
+        <Link to={"/user/profile"}>Profile</Link>
+      </button>)}
+    
       <button onClick={() => setShowMenu(true)} className="btn">
         Menu
       </button>

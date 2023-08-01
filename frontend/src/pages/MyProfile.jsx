@@ -35,7 +35,7 @@ const MyProfile = () => {
     };
     const getData = async () => {
       const response = await axios.get(
-        `http://localhost:9000/blogs/user/${_id}`,
+        `https://blog-backend-hibu.onrender.com/blogs/user/${_id}`,
         config
       );
       console.log(response.data);

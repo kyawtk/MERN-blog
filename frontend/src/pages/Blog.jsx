@@ -18,7 +18,7 @@ const Blog = () => {
         
       }}
       try {
-        let response = await axios.get("http://127.0.0.1:9000/blogs/" + id,config);
+        let response = await axios.get("https://blog-backend-hibu.onrender.com/blogs/" + id,config);
 
         setBlog(response.data);
         console.log(response.data);
