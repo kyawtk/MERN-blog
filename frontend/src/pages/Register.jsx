@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useRegisterUserMutation } from "../app/slices/userApiSlice";
+import { setCredentials } from "../app/slices/authSlice";
 
-import { registerUser } from "../app/slices/userApiSlice";
 const Register = () => {
+  const [registerUser, { isLoading }] = useRegisterUserMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [errMsg, setErrMsg] = useState("");
   const { userInfo } = useSelector((state) => state.auth);
 
-  const { loading, message } = useSelector((state) => state.userApi);
   const [formValues, setFormValues] = useState({
     name: "",
     password: "",
@@ -20,16 +22,19 @@ const Register = () => {
       return { ...current, [e.target.name]: e.target.value };
     });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit =async (e) => {
     e.preventDefault();
     console.log(formValues);
-    dispatch(registerUser(formValues));
-  };
-  useEffect(() => {
-    if (userInfo) {
+    try {
+      let res =await registerUser(formValues).unwrap();
+      console.log(res);
+      dispatch(setCredentials(res));
       navigate("/");
+    } catch (err) {
+      setErrMsg(err.data.message);
     }
-  }, [userInfo, navigate]);
+  };
+ 
   return (
     <div className="prose flex flex-col justify-center items-center mx-auto">
       <h2 className="text-start">Create New account</h2>
@@ -65,8 +70,8 @@ const Register = () => {
           Register
         </button>
       </form>
-      {loading && <p>Loading...</p>}
-      {message && <p className="text-error">{message}</p>}
+      {isLoading && <p>Loading...</p>}
+      {errMsg && <p className="text-error">{errMsg}</p>}
       <p>
         Already have an account?{" "}
         <Link to="/login">

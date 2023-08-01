@@ -1,18 +1,29 @@
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import {  logoutUser } from "../app/slices/userApiSlice";
 import { UserBlogs } from "./Profile";
+
 import { useState , useEffect } from "react";
+import { useLogoutUserMutation } from "../app/slices/userApiSlice";
+import { clearCredetials } from "../app/slices/authSlice";
+import { useNavigate } from "react-router-dom";
 const MyProfile = () => {
+  const navigate  = useNavigate()
+  const [logoutUser, {isLoading}] = useLogoutUserMutation()
   const { userInfo } = useSelector((state) => state.auth);
   const { token, _id } = userInfo;
   const [blogs , setBlogs] = useState([])
   const dispatch = useDispatch();
 
 
-  function handleLogout() {
-    dispatch(logoutUser());
-  }
+  const handleLogout = async () => {
+    try {
+      await logoutUser().unwrap();
+      dispatch(clearCredetials());
+      navigate('/login');
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
 
 

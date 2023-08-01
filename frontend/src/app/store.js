@@ -1,21 +1,21 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./slices/authSlice";
-import userApiReducer from "./slices/userApiSlice";
+
 import themeReducer from "./slices/themeSlice";
-import { blogApi } from "./slices/blogSlice";
+
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
+import { emptyApiSlice } from "./slices/apiSlice";
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
-    userApi: userApiReducer,
-    [blogApi.reducerPath]: blogApi.reducer,
+    [emptyApiSlice.reducerPath]: emptyApiSlice.reducer,
     theme: themeReducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(blogApi.middleware),
+    getDefaultMiddleware().concat(emptyApiSlice.middleware),
   devTools: true,
 });
 // optional, but required for refetchOnFocus/refetchOnReconnect behaviors

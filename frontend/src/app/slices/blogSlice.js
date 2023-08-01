@@ -1,24 +1,10 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+
+import { emptyApiSlice } from "./apiSlice";
 
 // Define a function to get the token from localStorage
-const getToken = () => {
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  return userInfo?.token || "";
-};
 
-export const blogApi = createApi({
-  reducerPath: "blogApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:9000",
-    prepareHeaders: (headers) => {
-      // Include the JWT token in the request headers
-      const token = getToken();
-      if (token) {
-        headers.set("authorization", `Bearer ${token}`);
-      }
-      return headers;
-    },
-  }),
+export const blogApi = emptyApiSlice.injectEndpoints({
+  
   endpoints: (builder) => ({
     getAllBlogs: builder.query({
       query: () => "/",
