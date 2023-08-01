@@ -9,7 +9,7 @@ const BlogCard = ({ user, title, body, createdAt, content, _id }) => {
   return (
     <div className="border p-4 max-w-[800px] my-10 text-justify w-full mx-auto shadow-md rounded-md hover:shadow-lg hover:shadow-neutral  transition-all duration-300 ease-in-out">
       <Link to={`/blogs/${_id}`}>
-        <h1 className="text-3xl font-bold  hover:underline hover:text-accent">
+        <h1 className="text-3xl whitespace-pre-wrap font-bold  hover:underline hover:text-accent">
           {title}
         </h1>
       </Link>
