@@ -7,7 +7,7 @@ const Header = () => {
   const [showMenu, setShowMenu] = React.useState(false);
   const {userInfo} = useSelector(state => state.auth)
   return (
-    <div className="navbar flex ">
+    <div className="navbar flex flex-wrap">
       <button className="btn  normal-case text-xl">
         <Link to={"/"}>Lovely Dairy</Link>
       </button>
